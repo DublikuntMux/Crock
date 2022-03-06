@@ -8,6 +8,7 @@ namespace VirsCh
 {
     class Effect
     {
+        // Регистрация DLL
         [DllImport("gdi32.dll", EntryPoint = "GdiAlphaBlend")]
         public static extern bool AlphaBlend(IntPtr hdcDest, int nXOriginDest, int nYOriginDest, 
             int nWidthDest, int nHeightDest, IntPtr hdcSrc, int nXOriginSrc, int nYOriginSrc, 
@@ -46,6 +47,7 @@ namespace VirsCh
         [DllImport("User32.dll")]
         static extern int ReleaseDC(IntPtr hwnd, IntPtr dc);
 
+        // Создание структур данных
         [StructLayout(LayoutKind.Sequential)]
         public struct POINT
         {
@@ -106,6 +108,7 @@ namespace VirsCh
             }
         }
 
+        // GDI еффект
         public static void GDI_payloads()
         {
             Random r = new Random();

