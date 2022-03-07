@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace VirsCh
+namespace Crock
 {
     class Effect
     {
@@ -287,5 +287,6 @@ namespace VirsCh
                 }
             }
         }
+
     }
 }

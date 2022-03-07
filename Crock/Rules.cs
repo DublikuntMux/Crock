@@ -1,7 +1,7 @@
-﻿using System;
+﻿using System.Threading;
 using System.Windows.Forms;
 
-namespace VirsCh
+namespace Crock
 {
     public partial class Rules : Form
     {
@@ -9,7 +9,7 @@ namespace VirsCh
         public Rules()
         {
             InitializeComponent();
-            FakeProgress.Start();
+            new Thread(() => FakeProgress()).Start();
         }
 
         // Анти закрытие
@@ -18,10 +18,11 @@ namespace VirsCh
             e.Cancel = true;
         }
 
-        // Фейковый прогресс бар
-        private void FakeProgress_Tick(object sender, EventArgs e)
+        //Фейковй удоление системы
+        private void FakeProgress()
         {
-            progressBar1.Value += 1;
+            progressBar1.Value++;
+            Thread.Sleep(3600);
         }
     }
 }

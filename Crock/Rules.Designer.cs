@@ -1,5 +1,5 @@
 ﻿
-namespace VirsCh
+namespace Crock
 {
     partial class Rules
     {
@@ -29,7 +29,6 @@ namespace VirsCh
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -37,7 +36,6 @@ namespace VirsCh
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.FakeProgress = new System.Windows.Forms.Timer(this.components);
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
@@ -125,17 +123,13 @@ namespace VirsCh
             this.label7.TabIndex = 11;
             this.label7.Text = "System removal process";
             // 
-            // FakeProgress
-            // 
-            this.FakeProgress.Enabled = true;
-            this.FakeProgress.Interval = 3600;
-            this.FakeProgress.Tick += new System.EventHandler(this.FakeProgress_Tick);
-            // 
             // progressBar1
             // 
+            this.progressBar1.ForeColor = System.Drawing.Color.Red;
             this.progressBar1.Location = new System.Drawing.Point(78, 319);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(481, 23);
+            this.progressBar1.Step = 100;
             this.progressBar1.TabIndex = 7;
             // 
             // Rules
@@ -143,7 +137,7 @@ namespace VirsCh
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(634, 427);
+            this.ClientSize = new System.Drawing.Size(658, 473);
             this.ControlBox = false;
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label7);
@@ -153,7 +147,7 @@ namespace VirsCh
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Location = new System.Drawing.Point(650, 430);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -177,7 +171,6 @@ namespace VirsCh
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Timer FakeProgress;
         private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

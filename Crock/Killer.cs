@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace VirsCh
+namespace Crock
 {
     class Killer
     {
