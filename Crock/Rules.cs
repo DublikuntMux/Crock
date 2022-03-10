@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Crock
 {
@@ -9,20 +8,12 @@ namespace Crock
         public Rules()
         {
             InitializeComponent();
-            new Thread(() => FakeProgress()).Start();
         }
 
         // Анти закрытие
         private void Rules_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
-        }
-
-        //Фейковй удоление системы
-        private void FakeProgress()
-        {
-            progressBar1.Value++;
-            Thread.Sleep(3600);
         }
     }
 }

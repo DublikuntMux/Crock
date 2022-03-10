@@ -32,9 +32,9 @@ namespace Crock
         public static void InputFuck()
         {
             BlockInput(true);
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             BlockInput(false);
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
         }
     }
 }
