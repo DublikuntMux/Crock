@@ -55,6 +55,7 @@
   <PropertyGroup>
     <StartupObject>Crock.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>

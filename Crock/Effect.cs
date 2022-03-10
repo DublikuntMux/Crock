@@ -10,42 +10,42 @@ namespace Crock
     {
         // Регистрация DLL
         [DllImport("gdi32.dll", EntryPoint = "GdiAlphaBlend")]
-        public static extern bool AlphaBlend(IntPtr hdcDest, int nXOriginDest, int nYOriginDest, 
-            int nWidthDest, int nHeightDest, IntPtr hdcSrc, int nXOriginSrc, int nYOriginSrc, 
+        private static extern bool AlphaBlend(IntPtr hdcDest, int nXOriginDest, int nYOriginDest,
+            int nWidthDest, int nHeightDest, IntPtr hdcSrc, int nXOriginSrc, int nYOriginSrc,
             int nWidthSrc, int nHeightSrc, BLENDFUNCTION blendFunction);
         [DllImport("gdi32.dll")]
-        static extern bool Rectangle(IntPtr hdc, int nLeftRect, int nTopRect, int nRightRect, int nBottomRect);
+        private static extern bool Rectangle(IntPtr hdc, int nLeftRect, int nTopRect, int nRightRect, int nBottomRect);
         [DllImport("gdi32.dll")]
-        static extern bool PlgBlt(IntPtr hdcDest, POINT[] lpPoint, IntPtr hdcSrc,
+        private static extern bool PlgBlt(IntPtr hdcDest, POINT[] lpPoint, IntPtr hdcSrc,
             int nXSrc, int nYSrc, int nWidth, int nHeight, IntPtr hbmMask, int xMask,
             int yMask);
         [DllImport("gdi32.dll", EntryPoint = "DeleteObject")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool DeleteObject(IntPtr hObject);
+        private static extern bool DeleteObject(IntPtr hObject);
         [DllImport("user32.dll")]
-        static extern bool InvalidateRect(IntPtr hWnd, IntPtr lpRect, bool bErase);
+        private static extern bool InvalidateRect(IntPtr hWnd, IntPtr lpRect, bool bErase);
         [DllImport("user32.dll", SetLastError = true)]
-        static extern IntPtr GetDC(IntPtr hWnd);
+        private static extern IntPtr GetDC(IntPtr hWnd);
         [DllImport("user32.dll")]
-        static extern IntPtr GetDesktopWindow();
+        private static extern IntPtr GetDesktopWindow();
         [DllImport("user32.dll")]
-        static extern IntPtr GetWindowDC(IntPtr hwnd);
+        private static extern IntPtr GetWindowDC(IntPtr hwnd);
         [DllImport("gdi32.dll")]
-        static extern IntPtr CreateSolidBrush(int crColor);
+        private static extern IntPtr CreateSolidBrush(int crColor);
         [DllImport("gdi32.dll", EntryPoint = "CreateCompatibleDC", SetLastError = true)]
-        static extern IntPtr CreateCompatibleDC(IntPtr hdc);
+        private static extern IntPtr CreateCompatibleDC(IntPtr hdc);
         [DllImport("gdi32.dll", EntryPoint = "CreateCompatibleBitmap")]
-        static extern IntPtr CreateCompatibleBitmap(IntPtr hdc, int nWidth, int nHeight);
+        private static extern IntPtr CreateCompatibleBitmap(IntPtr hdc, int nWidth, int nHeight);
         [DllImport("gdi32.dll", EntryPoint = "SelectObject")]
-        public static extern IntPtr SelectObject(IntPtr hdc, IntPtr hgdiobj);
+        private static extern IntPtr SelectObject(IntPtr hdc, IntPtr hgdiobj);
         [DllImport("gdi32.dll", EntryPoint = "BitBlt", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool BitBlt(IntPtr hdc, int nXDest, int nYDest, int nWidth,
+        private static extern bool BitBlt(IntPtr hdc, int nXDest, int nYDest, int nWidth,
             int nHeight, IntPtr hdcSrc, int nXSrc, int nYSrc, TernaryRasterOperations dwRop);
         [DllImport("gdi32.dll", EntryPoint = "DeleteDC")]
-        public static extern bool DeleteDC(IntPtr hdc);
+        private static extern bool DeleteDC(IntPtr hdc);
         [DllImport("User32.dll")]
-        static extern int ReleaseDC(IntPtr hwnd, IntPtr dc);
+        private static extern int ReleaseDC(IntPtr hwnd, IntPtr dc);
 
         // Создание структур данных
         [StructLayout(LayoutKind.Sequential)]
@@ -71,7 +71,7 @@ namespace Crock
             }
         }
 
-        enum TernaryRasterOperations : uint
+        private enum TernaryRasterOperations : uint
         {
             SRCCOPY = 0x00CC0020,
             SRCPAINT = 0x00EE0086,
@@ -162,8 +162,8 @@ namespace Crock
                     InvalidateRect(IntPtr.Zero, IntPtr.Zero, true);
                 Thread.Sleep(r.Next(25));
             }
-            Misc.clear_screen();
-            new Thread(() => GDI_payloads2(r, gdi_text, x, y)).Start();
+            Misc.Clear_screen();
+            new Thread(() => GDI_payloads2(gdi_text, x, y)).Start();
             for (int num = 0; num < 500; num++)
             {
                 hwnd = GetDesktopWindow();
@@ -172,7 +172,7 @@ namespace Crock
                 DeleteDC(hdc);
                 Thread.Sleep(50);
             }
-            Misc.clear_screen();
+            Misc.Clear_screen();
             for (int num = 0; num < 700; num++)
             {
                 if (num < 300)
@@ -212,7 +212,7 @@ namespace Crock
                     Thread.Sleep(50);
                 }
             }
-            Misc.clear_screen();
+            Misc.Clear_screen();
             gdi_text = true;
             for (int num = 0; num < 500; num++)
             {
@@ -245,13 +245,13 @@ namespace Crock
             Environment.Exit(-1);
         }
 
-        public static void GDI_payloads2(Random r, bool gdi_text, int x, int y)
+        public static void GDI_payloads2(bool gdi_text, int x, int y)
         {
             IntPtr hwnd = GetDesktopWindow();
             IntPtr hdc = GetWindowDC(hwnd);
             IntPtr desktop = GetDC(IntPtr.Zero);
             int num_count = 1000;
-            r = new Random();
+            Random r = new Random();
             for (; ; )
             {
                 if (!gdi_text)
@@ -287,6 +287,5 @@ namespace Crock
                 }
             }
         }
-
     }
 }

