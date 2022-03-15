@@ -1,16 +1,17 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace Crock
 {
     public partial class Rules : Form
     {
-        // Запус окна с правилами
+        // Start rule window
         public Rules()
         {
             InitializeComponent();
         }
 
-        // Анти закрытие
+        // Anti close
         private void Rules_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;

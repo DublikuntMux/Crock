@@ -6,22 +6,22 @@ namespace Crock
 {
     class Misc
     {
-        // Регистрация DLL
+        // Registration DLL
         [DllImport("user32.dll")]
         private static extern bool BlockInput(bool block);
         [DllImport("user32.dll")]
         private static extern bool InvalidateRect(IntPtr hWnd, IntPtr lpRect, bool bErase);
 
-        // Получение пути к файлу
-        public static string MyLoacation()
+        // Getting the path to a file
+        public static string MyLocation()
         {
-            return System.Reflection.Assembly.GetEntryAssembly().Location;
+            return System.Reflection.Assembly.GetEntryAssembly()?.Location;
         }
 
-        // Очстка экрана от GDI эфектов
+        // Clearing the screen from GDI effects
         public static void Clear_screen()
         {
-            for (int num = 0; num < 10; num++)
+            for (var num = 0; num < 10; num++)
             {
                 InvalidateRect(IntPtr.Zero, IntPtr.Zero, true);
                 Thread.Sleep(10);
