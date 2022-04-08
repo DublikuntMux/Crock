@@ -31,7 +31,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <LangVersion>10</LangVersion>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>dmsing.snk</AssemblyOriginatorKeyFile>
     <PublicSign>true</PublicSign>
   </PropertyGroup>
@@ -111,7 +111,6 @@
     <EmbeddedResource Include="Rules.resx">
       <DependentUpon>Rules.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="dmsing.snk" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
