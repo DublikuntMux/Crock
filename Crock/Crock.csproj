@@ -32,8 +32,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <LangVersion>10</LangVersion>
     <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>dmsing.snk</AssemblyOriginatorKeyFile>
-    <PublicSign>true</PublicSign>
+    <PublicSign>false</PublicSign>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
